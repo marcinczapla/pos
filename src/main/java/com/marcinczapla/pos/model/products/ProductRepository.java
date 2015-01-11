@@ -7,7 +7,7 @@ public interface ProductRepository {
 
     public Product loadById(Long productId);
 
-    public Product loadByEan(String ean);
+    public Product loadByBarCode(String barCode);
 
 
 }

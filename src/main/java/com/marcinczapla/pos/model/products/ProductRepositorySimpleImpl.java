@@ -27,9 +27,9 @@ public class ProductRepositorySimpleImpl implements ProductRepository {
     }
 
     @Override
-    public Product loadByEan(String ean) {
+    public Product loadByBarCode(String barCode) {
         for(Product p : ProductRepositorySimpleImpl.getProducts()){
-            if (p.getEan().equals(ean)){
+            if (p.getBarCode().equals(barCode)){
                 return p;
             }
         }
