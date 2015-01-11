@@ -1,4 +1,4 @@
-package com.marcinczapla.pos.model;
+package com.marcinczapla.pos.model.products;
 
 import java.math.BigDecimal;
 
@@ -11,6 +11,45 @@ public class Product {
     private String name;
     private String ean;
     private BigDecimal price;
+
+    public Product(Long productId, String name, String ean, BigDecimal price) {
+        this.productId = productId;
+        this.name = name;
+        this.ean = ean;
+        this.price = price;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {

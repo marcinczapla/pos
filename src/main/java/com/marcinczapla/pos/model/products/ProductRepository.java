@@ -1,4 +1,4 @@
-package com.marcinczapla.pos.model;
+package com.marcinczapla.pos.model.products;
 
 /**
  * Created by Marcin on 2015-01-11.
