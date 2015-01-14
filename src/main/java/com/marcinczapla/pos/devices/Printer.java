@@ -1,6 +1,6 @@
 package com.marcinczapla.pos.devices;
 
-import com.marcinczapla.pos.interfaces.devices.OutputDevice;
+import com.marcinczapla.pos.devices.interfaces.OutputDevice;
 
 /**
  * Created by Marcin Czapla on 2015-01-13.

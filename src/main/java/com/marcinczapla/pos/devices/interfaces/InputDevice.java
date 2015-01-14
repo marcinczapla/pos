@@ -1,4 +1,4 @@
-package com.marcinczapla.pos.interfaces.devices;
+package com.marcinczapla.pos.devices.interfaces;
 
 import com.marcinczapla.pos.interfaces.Subject;
 

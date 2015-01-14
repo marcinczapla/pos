@@ -1,6 +1,6 @@
 package com.marcinczapla.pos.devices;
 
-import com.marcinczapla.pos.interfaces.devices.InputDevice;
+import com.marcinczapla.pos.devices.interfaces.InputDevice;
 import com.marcinczapla.pos.interfaces.Observer;
 
 import java.util.ArrayList;

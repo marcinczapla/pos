@@ -1,5 +1,8 @@
 package com.marcinczapla.pos;
 
+import com.marcinczapla.pos.devices.interfaces.InputDevice;
+import com.marcinczapla.pos.devices.interfaces.OutputDevice;
+
 /**
  * Hello world!
  *

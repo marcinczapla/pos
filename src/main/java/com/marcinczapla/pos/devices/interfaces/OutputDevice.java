@@ -1,4 +1,4 @@
-package com.marcinczapla.pos.interfaces.devices;
+package com.marcinczapla.pos.devices.interfaces;
 
 /**
  * Created by Marcin Czapla on 2015-01-13.
