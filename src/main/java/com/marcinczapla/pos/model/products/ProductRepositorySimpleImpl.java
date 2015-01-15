@@ -1,5 +1,7 @@
 package com.marcinczapla.pos.model.products;
 
+import com.marcinczapla.pos.model.products.exceptions.ProductNotFoundException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +19,22 @@ public class ProductRepositorySimpleImpl implements ProductRepository {
     }
 
     @Override
-    public Product loadById(Long productId) {
+    public Product loadById(Long productId) throws ProductNotFoundException{
         for(Product p : ProductRepositorySimpleImpl.getProducts()){
             if (p.getProductId().equals(productId)){
                 return p;
             }
         }
-        return null;
+        throw new ProductNotFoundException();
     }
 
     @Override
-    public Product loadByBarCode(String barCode) {
+    public Product loadByBarCode(String barCode) throws ProductNotFoundException{
         for(Product p : ProductRepositorySimpleImpl.getProducts()){
             if (p.getBarCode().equals(barCode)){
                 return p;
             }
         }
-        return null;
+        throw new ProductNotFoundException();
     }
 }

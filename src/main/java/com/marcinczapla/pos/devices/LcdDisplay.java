@@ -8,6 +8,6 @@ import com.marcinczapla.pos.devices.interfaces.OutputDevice;
 class LcdDisplay implements OutputDevice {
     @Override
     public void printValue(String value) {
-
+        System.out.println(value);
     }
 }

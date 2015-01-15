@@ -9,7 +9,7 @@ class SimpleInputDeviceImpl implements InputDevice {
 
     @Override
     public String readValue() {
-        String barcodeValue = "111111111111";
+        String barcodeValue = "1111111111111";
         return barcodeValue;
     }
 }
