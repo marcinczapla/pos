@@ -71,9 +71,8 @@ public class Product {
         if (barCode != null ? !barCode.equals(product.barCode) : product.barCode != null) return false;
         if (name != null ? !name.equals(product.name) : product.name != null) return false;
         if (price != null ? !price.equals(product.price) : product.price != null) return false;
-        if (productId != null ? !productId.equals(product.productId) : product.productId != null) return false;
+        return !(productId != null ? !productId.equals(product.productId) : product.productId != null);
 
-        return true;
     }
 
     @Override

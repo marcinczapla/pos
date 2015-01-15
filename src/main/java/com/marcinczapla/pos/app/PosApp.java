@@ -8,6 +8,7 @@ import com.marcinczapla.pos.model.products.Product;
 import com.marcinczapla.pos.model.products.ProductRepository;
 import com.marcinczapla.pos.model.products.exceptions.ProductNotFoundException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,16 +16,19 @@ import java.util.List;
  * Created by Marcin on 2015-01-14.
  */
 public class PosApp {
-    private InputDeviceFactory inputDeviceFactory;
-    private OutputDeviceFactory outputDeviceFactory;
+    private static final String INVALID_BARCODE_MESSAGE = "Invalid Barcode";
+    private static final String PRODUCT_NOT_FOUND_MESSAGE = "Product not found";
 
-    private ProductRepository productRepository;
+    private final InputDeviceFactory inputDeviceFactory;
+    private final OutputDeviceFactory outputDeviceFactory;
+
+    private final ProductRepository productRepository;
 
     private InputDevice scanner;
     private OutputDevice lcdDisplay;
     private OutputDevice printer;
 
-    private List<Product> scannedProducts;
+    private final List<Product> scannedProducts;
 
     public PosApp(InputDeviceFactory inputDeviceFactory, OutputDeviceFactory outputDeviceFactory, ProductRepository repository) {
         this.inputDeviceFactory = inputDeviceFactory;
@@ -40,19 +44,38 @@ public class PosApp {
     }
 
     public void doWork() {
-        Product product = null;
         String barCode = scanner.readValue();
         if (!barCode.isEmpty()) {
+            processBarcode(barCode);
+        } else {
+            lcdDisplay.printValue(INVALID_BARCODE_MESSAGE);
+        }
+    }
+
+    private void processBarcode(String barCode) {
+        Product product = null;
+        if (!"exit".equals(barCode)) {
             try {
                 product = productRepository.loadByBarCode(barCode);
             } catch (ProductNotFoundException e) {
-                e.printStackTrace();
+                lcdDisplay.printValue(PRODUCT_NOT_FOUND_MESSAGE);
             }
-            if (product != null) {
+            if (product!=null) {
                 scannedProducts.add(product);
+                lcdDisplay.printValue(product.getName() + " " + product.getPrice());
             }
         } else {
-            lcdDisplay.printValue("Invalid Barcode");
+            printTotals();
         }
+    }
+
+    private void printTotals() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Product p : scannedProducts) {
+            total = total.add(p.getPrice());
+            printer.printValue(p.getName() + " " + p.getPrice());
+        }
+        printer.printValue(total.toString());
+        lcdDisplay.printValue(total.toString());
     }
 }
