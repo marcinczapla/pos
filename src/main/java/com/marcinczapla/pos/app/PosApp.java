@@ -53,13 +53,8 @@ public class PosApp {
     }
 
     private void processBarcode(String barCode) {
-        Product product = null;
         if (!"exit".equals(barCode)) {
-            try {
-                product = productRepository.loadByBarCode(barCode);
-            } catch (ProductNotFoundException e) {
-                lcdDisplay.printValue(PRODUCT_NOT_FOUND_MESSAGE);
-            }
+            Product product = findProductByBarcode(barCode);
             if (product!=null) {
                 scannedProducts.add(product);
                 lcdDisplay.printValue(product.getName() + " " + product.getPrice());
@@ -67,6 +62,16 @@ public class PosApp {
         } else {
             printTotals();
         }
+    }
+
+    private Product findProductByBarcode(String barCode) {
+        Product product = null;
+        try {
+            product = productRepository.loadByBarCode(barCode);
+        } catch (ProductNotFoundException e) {
+            lcdDisplay.printValue(PRODUCT_NOT_FOUND_MESSAGE);
+        }
+        return product;
     }
 
     private void printTotals() {
